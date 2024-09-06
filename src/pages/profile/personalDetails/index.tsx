@@ -2,7 +2,7 @@
 import React, { Fragment } from "react";
 
 // View Import
-import PersonalDetailsView from "@/views/Product/PersonalDetails";
+import PersonalDetailsView from "@/views/Profile/PersonalDetails";
 // Next JS Imports
 import Head from "next/head";
 
