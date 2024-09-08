@@ -80,8 +80,35 @@ export interface IPersonalDetails {
 }
 
 export interface ICancer {
+  /**
+   * diagnoed: user's condition of cancer .
+   */
   diagnosed: boolean;
+  /**
+   * location: User's location .
+   */
   location: string;
+  /**
+   * specifiedTreatment: User's treatment type .
+   */
   specifiedTreatment: string;
+  /**
+   * wish: any suggestions .
+   */
   wish: string;
+}
+
+export interface IPayment {
+  /**
+   * bsb: user's bsb number .
+   */
+  bsb: number;
+  /**
+   * holderName: account holder name .
+   */
+  holderName: string;
+  /**
+   * accountNumber: users' account number .
+   */
+  accountNumber: number;
 }

@@ -14,12 +14,14 @@ import HigherOrderComponent from "@/components/HigherOrderComponent";
 
 // Font variable Imports
 import { fontSatoshi } from "@/config/fonts.config";
+import { Manrope } from "next/font/google";
 
 // React Imports
 import { FC } from "react";
 
+const manrope = Manrope({ subsets: ["latin"] });
 const App: FC<AppProps> = ({ Component, pageProps }) => (
-  <main className={fontSatoshi.variable}>
+  <main className={manrope.className}>
     <ReactQueryProvider>
       <ReduxProvider>
         <HigherOrderComponent>
