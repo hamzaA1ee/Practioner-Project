@@ -12,6 +12,7 @@ import { FormValues } from "@/types/Interfaces/formValues.interface";
 import Head from "next/head";
 import PersonalDetailsView from "@/views/Profile/PersonalDetails";
 import RatingsView from "@/views/Profile/Ratings";
+import IssuesView from "@/views/Profile/Issues";
 
 const Profile = () => {
   const forms = ["Personal Details", "Ratings"];
@@ -32,6 +33,19 @@ const Profile = () => {
         physiotherapist: 0,
         osteopath: 0,
       },
+      issues: {
+        headAndNeck: false,
+        torso: false,
+        pelvis: false,
+        arms: false,
+        legs: false,
+      },
+      cancer: {
+        diagnosed: false,
+        location: "",
+        specifiedTreatment: "",
+        wish: "",
+      },
     },
     onSubmit: (
       values: FormValues,
@@ -50,7 +64,8 @@ const Profile = () => {
       <div className="mx-auto w-full max-w-7xl py-2">
         <div className="mx-auto my-4 max-w-2xl md:my-6">
           {/* <PersonalDetailsView formik={formik} /> */}
-          <RatingsView formik={formik} />
+          {/* <RatingsView formik={formik} /> */}
+          {/* <IssuesView formik={formik} /> */}
         </div>
       </div>
     </Fragment>

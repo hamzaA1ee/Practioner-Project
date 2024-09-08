@@ -3,7 +3,6 @@ import { IRatingsProps } from "@/types/Interfaces/formik.interface";
 import { FC, Fragment, useState } from "react";
 
 const RatingsView: FC<IRatingsProps> = ({ formik }) => {
-  const [rateValue, setRateValue] = useState(5);
   const handleRatings = (item: string, val: number) => {
     formik.setFieldValue(`ratings.${item}`, 5 - val + 1);
   };
