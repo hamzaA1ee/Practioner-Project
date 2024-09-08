@@ -7,19 +7,30 @@ import { FormikHelpers, useFormik } from "formik";
 //Interfaces Imports
 import { FormValues } from "@/types/Interfaces/formValues.interface";
 // View Import
-import PersonalDetails from "./personalDetails";
+
 // Next JS Imports
 import Head from "next/head";
+import PersonalDetailsView from "@/views/Profile/PersonalDetails";
+import RatingsView from "@/views/Profile/Ratings";
 
 const Profile = () => {
+  const forms = ["Personal Details", "Ratings"];
   const formik = useFormik<FormValues>({
     initialValues: {
       personalDetails: {
-        image: "alksdfjla",
-        location: "jalksdfjl",
+        image: { secure_url: "" },
+        location: "",
         dob: "",
         gender: "male",
         issues: [],
+      },
+      ratings: {
+        acupuncturist: 0,
+        remedialMessageTherapist: 0,
+        chiropractor: 0,
+        myotherapist: 0,
+        physiotherapist: 0,
+        osteopath: 0,
       },
     },
     onSubmit: (
@@ -35,7 +46,13 @@ const Profile = () => {
       <Head>
         <title>Profile | Personal Details</title>
       </Head>
-      <PersonalDetails formik={formik} />
+
+      <div className="mx-auto w-full max-w-7xl py-2">
+        <div className="mx-auto my-4 max-w-2xl md:my-6">
+          {/* <PersonalDetailsView formik={formik} /> */}
+          <RatingsView formik={formik} />
+        </div>
+      </div>
     </Fragment>
   );
 };

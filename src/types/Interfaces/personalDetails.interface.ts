@@ -6,7 +6,7 @@ export interface IPersonalDetails {
   /**
    * image: User's image .
    */
-  image: string;
+  image: {secure_url:string};
     /**
    * issues: User's issues .
    */
