@@ -2,6 +2,9 @@
 import { IRatingsProps } from "@/types/Interfaces/formik.interface";
 import { FC, Fragment, useState } from "react";
 
+//UI Imports
+import { Aestrik } from "@/components/ui/aestrik";
+
 const RatingsView: FC<IRatingsProps> = ({ formik }) => {
   const handleRatings = (item: string, val: number) => {
     formik.setFieldValue(`ratings.${item}`, 5 - val + 1);
@@ -19,7 +22,7 @@ const RatingsView: FC<IRatingsProps> = ({ formik }) => {
               htmlFor="dob"
             >
               Please select which of the following you have used in the past and
-              rate how well they worked for you. (out of 5 stars)
+              rate how well they worked for you. (out of 5 stars) <Aestrik />
             </label>
           </div>
 

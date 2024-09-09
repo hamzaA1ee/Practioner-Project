@@ -3,8 +3,12 @@ import { FC, Fragment } from "react";
 import { IPersonalDetailsProps } from "@/types/Interfaces/formik.interface";
 import { CldUploadWidget } from "next-cloudinary";
 
+//ui imports
+import { Aestrik } from "@/components/ui/aestrik";
+
 //Next Imports
 import Image from "next/image";
+import { ContinueButton } from "@/components/ui/continueButton";
 
 //default values
 const medicalConditions: string[] = [
@@ -33,13 +37,14 @@ const KEY = "NEXT_PUBLIC_CLOUDINARY_PRESET_NAME";
 
 const PersonalDetailsView: FC<IPersonalDetailsProps> = ({ formik }) => {
   const handleClickButton = () => {
-    console.log("working n handle click");
-    console.log(formik.values.personalDetails.image.secure_url);
     formik.setFieldValue("personalDetails.image.secure_url", null);
   };
+
+  console.log("for", formik);
   return (
     <Fragment>
       {/* <div className="overflow-hidden rounded-xl bg-white p-4 shadow"> */}
+      {/* <form onSubmit={formik.handleSubmit}> */}
       <div className="flex items-center rounded-lg font-bold"></div>
       <p className="text-[26px] font-bold text-gray-900">Personal Details</p>
 
@@ -48,8 +53,8 @@ const PersonalDetailsView: FC<IPersonalDetailsProps> = ({ formik }) => {
         <div className="mt-4 gap-6 space-y-4 md:grid md:grid-cols-1 md:space-y-0">
           <div className="w-full">
             <p className="text-sm font-normal text-gray-900 mb-2">
-              {formik.values.personalDetails.image?.secure_url ||
-                "Upload Profile Image"}
+              {"Uploaded Image" || "Upload Profile Image"}
+              <Aestrik />
             </p>
           </div>
           <div className="flex items-center justify-center w-full">
@@ -116,6 +121,7 @@ const PersonalDetailsView: FC<IPersonalDetailsProps> = ({ formik }) => {
                     SVG, PNG, JPG or GIF (MAX. 800x400px)
                   </p>
                 </div>
+                {/* <p className="text-red-600">{formik)}</p> */}
                 {/* <input id="dropzone-file" type="file" className="hidden" /> */}
 
                 <CldUploadWidget
@@ -148,7 +154,12 @@ const PersonalDetailsView: FC<IPersonalDetailsProps> = ({ formik }) => {
           {/*  //ends here */}
         </div>
       }
-
+      {(formik.values.personalDetails.image?.secure_url == "" ||
+        formik.values.personalDetails.image?.secure_url == null) && (
+        <p className="text-red-600 text-[12px] mt-2">
+          {formik.errors.image?.secure_url}
+        </p>
+      )}
       {/* image picker ends */}
 
       {/* below are the dob and locaiton btns */}
@@ -159,6 +170,7 @@ const PersonalDetailsView: FC<IPersonalDetailsProps> = ({ formik }) => {
             htmlFor="dob"
           >
             Date of Birth
+            <Aestrik />
           </label>
           <input
             className="flex h-10 w-full rounded-md border border-black/30 bg-transparent px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
@@ -170,25 +182,38 @@ const PersonalDetailsView: FC<IPersonalDetailsProps> = ({ formik }) => {
             name="personalDetails.dob"
             value={formik.values?.personalDetails.dob}
           />
+          {formik.values.personalDetails.dob == "" && (
+            <p className="text-red-600 text-[12px] mt-2">
+              {formik.errors?.dob}
+            </p>
+          )}
         </div>
+
         <div className="w-full">
           <label
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             htmlFor="location"
           >
             location
+            <Aestrik />
           </label>
           <input
             className="flex h-10 w-full rounded-md border border-black/30 bg-transparent px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
             type="text"
-            placeholder="Enter your last name"
+            placeholder="Enter Your Location"
             id="location"
             name="personalDetails.location"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values?.personalDetails.location}
           />
+          {formik.values.personalDetails.location == "" && (
+            <p className="text-red-600 text-[12px] mt-2">
+              {formik.errors?.location}
+            </p>
+          )}
         </div>
+
         {/* location and dob ends here */}
       </div>
 
@@ -198,7 +223,13 @@ const PersonalDetailsView: FC<IPersonalDetailsProps> = ({ formik }) => {
           <div className="w-full">
             <p className="text-sm font-bold text-gray-900 mb-4">
               Do you have preference in gender for your therapist?
+              <span className="text-red-500 font-bold ml-1">*</span>
             </p>
+            {formik.values.personalDetails.gender == "" && (
+              <p className="text-red-600 text-[12px] mt-2">
+                {formik.errors?.gender}
+              </p>
+            )}
 
             <div className="flex items-center mb-4">
               <input
@@ -206,6 +237,7 @@ const PersonalDetailsView: FC<IPersonalDetailsProps> = ({ formik }) => {
                 id="default-radio-1"
                 type="radio"
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 value="male"
                 name="personalDetails.gender"
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
@@ -258,7 +290,15 @@ const PersonalDetailsView: FC<IPersonalDetailsProps> = ({ formik }) => {
 
       <div className="mt-6 gap-6 space-y-4 md:grid md:grid-cols-1 md:space-y-0">
         <div className="w-full">
-          <p className="text-sm font-bold text-gray-900 mb-4">System Issues</p>
+          <p className="text-sm font-bold text-gray-900 mb-4">
+            System Issues
+            <Aestrik />
+          </p>
+          {formik.values.personalDetails.issues.length == 0 && (
+            <p className="text-red-600 text-[12px] mt-2">
+              {formik.errors?.issue}
+            </p>
+          )}
         </div>
 
         <ul className="flex flex-wrap gap-4">
@@ -270,6 +310,9 @@ const PersonalDetailsView: FC<IPersonalDetailsProps> = ({ formik }) => {
               <div className="relative flex items-start">
                 <div className="flex items-center h-5">
                   <input
+                    checked={formik.values.personalDetails.issues.includes(
+                      item
+                    )}
                     id={`checkbox-${index}`}
                     name="personalDetails.issues"
                     value={item.toString()}
@@ -290,6 +333,10 @@ const PersonalDetailsView: FC<IPersonalDetailsProps> = ({ formik }) => {
         </ul>
       </div>
       {/* </div> */}
+      <button type="submit" className="text-white bg-black p-4">
+        Submit
+      </button>
+      {/* </form>  */}
     </Fragment>
   );
 };
