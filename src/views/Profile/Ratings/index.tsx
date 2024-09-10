@@ -31,51 +31,48 @@ const RatingsView: FC<IRatingsProps> = ({ formik }) => {
             )}
           </div>
 
-          {Object.keys(formik.values.ratings).map(
-            (item: string, index: number) => (
-              <div className="flex justify-between">
-                <label
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  htmlFor="ratings"
-                >
-                  {item.charAt(0).toUpperCase() +
-                    item.substring(1, item.length)}
-                </label>
+          {Object.keys(formik.values.ratings).map((item: string) => (
+            <div className="flex justify-between">
+              <label
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                htmlFor="ratings"
+              >
+                {item.charAt(0).toUpperCase() + item.substring(1, item.length)}
+              </label>
 
-                <div className="flex flex-row-reverse justify-end items-center">
-                  {stars.map((val, extra = val) => (
-                    <Fragment>
-                      <input
-                        id="hs-ratings-readonly-1"
-                        type="radio"
-                        checked={5 - extra == formik.values.ratings[item]}
-                        onClick={() => {
-                          handleRatings(item, val);
-                        }}
-                        className="peer -ms-5 size-5 bg-transparent border-0 text-transparent cursor-pointer appearance-none checked:bg-none focus:bg-none focus:ring-0 focus:ring-offset-0"
-                        name={`ratings.${item}`}
-                      />
-                      <label
-                        htmlFor="hs-ratings-readonly-1"
-                        className="peer-checked:text-yellow-400 text-gray-300 pointer-events-none dark:peer-checked:text-yellow-600 dark:text-neutral-600"
+              <div className="flex flex-row-reverse justify-end items-center">
+                {stars.map((val, extra = val) => (
+                  <Fragment>
+                    <input
+                      id="hs-ratings-readonly-1"
+                      type="radio"
+                      checked={5 - extra == formik.values.ratings[item]}
+                      onClick={() => {
+                        handleRatings(item, val);
+                      }}
+                      className="peer -ms-5 size-5 bg-transparent border-0 text-transparent cursor-pointer appearance-none checked:bg-none focus:bg-none focus:ring-0 focus:ring-offset-0"
+                      name={`ratings.${item}`}
+                    />
+                    <label
+                      htmlFor="hs-ratings-readonly-1"
+                      className="peer-checked:text-yellow-400 text-gray-300 pointer-events-none dark:peer-checked:text-yellow-600 dark:text-neutral-600"
+                    >
+                      <svg
+                        className="shrink-0 size-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        viewBox="0 0 16 16"
                       >
-                        <svg
-                          className="shrink-0 size-5"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                        </svg>
-                      </label>
-                    </Fragment>
-                  ))}
-                </div>
+                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                      </svg>
+                    </label>
+                  </Fragment>
+                ))}
               </div>
-            )
-          )}
+            </div>
+          ))}
         </div>
       </form>
     </Fragment>

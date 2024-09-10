@@ -13,7 +13,7 @@ import { ToasterProvider } from "@/providers/toaster-provider";
 import HigherOrderComponent from "@/components/HigherOrderComponent";
 
 // Font variable Imports
-import { fontSatoshi } from "@/config/fonts.config";
+
 import { Manrope } from "next/font/google";
 
 // React Imports
