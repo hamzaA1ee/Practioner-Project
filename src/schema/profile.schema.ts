@@ -1,4 +1,4 @@
-import { object, string, number, array, boolean, InferType } from "yup";
+import { object, string, number, array, boolean } from "yup";
 
 export const personalDetails = object({
   image: object({

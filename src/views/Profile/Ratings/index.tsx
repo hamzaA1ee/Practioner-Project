@@ -1,6 +1,6 @@
 // React Imports
 import { IRatingsProps } from "@/types/Interfaces/formik.interface";
-import { FC, Fragment, useState } from "react";
+import { FC, Fragment } from "react";
 
 //UI Imports
 import { Aestrik } from "@/components/ui/aestrik";

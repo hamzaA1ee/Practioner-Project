@@ -20,3 +20,7 @@ export interface ICancerProps {
 export interface IPaymentProps {
   formik: FormikProps<FormValues>;
 }
+
+export interface IFormProps {
+  formik: FormikProps<FormValues>;
+}

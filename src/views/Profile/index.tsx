@@ -1,8 +1,7 @@
 import { FormValues } from "@/types/Interfaces/formValues.interface";
 // React Imports
 //Types Imports
-import { FC, Fragment, useState } from "react";
-import { ContinueButton } from "@/components/ui/continueButton";
+import { Fragment, useState } from "react";
 
 // View Import
 import PersonalDetailsView from "@/views/Profile/PersonalDetails";
@@ -12,21 +11,18 @@ import CancerView from "@/views/Profile/Cancer";
 import PaymentView from "@/views/Payment";
 
 //formik imports
-import { useFormik, FormikHelpers } from "formik";
+import { useFormik } from "formik";
 
 //Yup validations
 import {
-  cancer,
   cancerSchema,
   issueSchema,
   paymentSchema,
-  personalDetails,
   personalDetailsSchema,
   ratingSchema,
 } from "@/schema/profile.schema";
-import { error } from "console";
-import { loginSchema } from "@/schema/login.schema";
-import next from "next";
+
+import ReviewView from "./Review";
 
 const ProfileView = () => {
   const [step, setStep] = useState(1);
@@ -74,8 +70,8 @@ const ProfileView = () => {
       },
     },
     onSubmit: (
-      values: FormValues,
-      formikHelpers: FormikHelpers<FormValues>
+      values: FormValues
+      // formikHelpers: FormikHelpers<FormValues>
     ) => {
       console.log("working....");
       console.log(values);
@@ -100,7 +96,7 @@ const ProfileView = () => {
       setTimeout(() => {
         setLoading(false);
         setStep((prev) => prev + 1);
-      });
+      }, 500);
     } else {
       formik.setErrors(errors);
     }
@@ -153,7 +149,7 @@ const ProfileView = () => {
                     className="text-[32px] font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                     htmlFor="dob"
                   >
-                    Complete Profile
+                    {step == 6 ? "Review Profile" : "Complete"}
                   </label>
                   <hr className="h-px my-4 bg-custom-gray border-1 dark:bg-gray-700" />
                 </div>
@@ -163,6 +159,7 @@ const ProfileView = () => {
                 {step == 3 && <IssuesView formik={formik} />}
                 {step == 4 && <CancerView formik={formik} />}
                 {step == 5 && <PaymentView formik={formik} />}
+                {step == 6 && <ReviewView formik={formik} />}
 
                 <div
                   className={`flex mt-4 items-end w-full ${step > 1 ? "justify-between" : "justify-end"} `}
@@ -208,6 +205,12 @@ const ProfileView = () => {
                   ) : (
                     <button
                       type="submit"
+                      onClick={() => {
+                        setLoading(true);
+                        setTimeout(() => {
+                          setLoading(false), setStep((step) => step + 1);
+                        }, 500);
+                      }}
                       className="w-[209px] h-[56px]  mt-4 text-white bg-black rounded-md"
                     >
                       Finish

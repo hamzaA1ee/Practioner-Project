@@ -8,7 +8,6 @@ import { Aestrik } from "@/components/ui/aestrik";
 
 //Next Imports
 import Image from "next/image";
-import { ContinueButton } from "@/components/ui/continueButton";
 
 //default values
 const medicalConditions: string[] = [
@@ -125,7 +124,7 @@ const PersonalDetailsView: FC<IPersonalDetailsProps> = ({ formik }) => {
                 {/* <input id="dropzone-file" type="file" className="hidden" /> */}
 
                 <CldUploadWidget
-                  uploadPreset="k0hk2aqn"
+                  uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_PRESET_NAME}
                   onError={(error) => console.log(error)}
                   onSuccess={(result, { widget }) => {
                     formik.setFieldValue("personalDetails.image", result?.info); // { public_id, secure_url, etc }

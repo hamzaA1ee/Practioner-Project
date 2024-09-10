@@ -1,7 +1,6 @@
 // React Imports
 import { IIssuesProps } from "@/types/Interfaces/formik.interface";
 import { FC, Fragment } from "react";
-import { number } from "yup";
 
 const issues = ["Head and Neck", "Torso", "Pelvis", "Arms", "Legs"];
 const IssuesView: FC<IIssuesProps> = ({ formik }) => {
