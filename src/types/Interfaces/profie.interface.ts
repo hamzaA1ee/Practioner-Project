@@ -64,7 +64,7 @@ export interface IPersonalDetails {
   /**
    * issues: User's issues .
    */
-  issues: string[];
+  issue: string[];
   /**
    * location: User's location .
    */
@@ -83,7 +83,7 @@ export interface ICancer {
   /**
    * diagnoed: user's condition of cancer .
    */
-  diagnosed: boolean;
+  diagnosed: string;
   /**
    * location: User's location .
    */

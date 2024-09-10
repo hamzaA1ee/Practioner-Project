@@ -24,6 +24,11 @@ const RatingsView: FC<IRatingsProps> = ({ formik }) => {
               Please select which of the following you have used in the past and
               rate how well they worked for you. (out of 5 stars) <Aestrik />
             </label>
+            {formik.errors?.ratings && (
+              <p className="text-red-600 text-[12px] mt-2">
+                {String(formik.errors?.ratings)}
+              </p>
+            )}
           </div>
 
           {Object.keys(formik.values.ratings).map(
@@ -38,12 +43,15 @@ const RatingsView: FC<IRatingsProps> = ({ formik }) => {
                 </label>
 
                 <div className="flex flex-row-reverse justify-end items-center">
-                  {stars.map((val) => (
+                  {stars.map((val, extra = val) => (
                     <Fragment>
                       <input
                         id="hs-ratings-readonly-1"
                         type="radio"
-                        onClick={() => handleRatings(item, val)}
+                        checked={5 - extra == formik.values.ratings[item]}
+                        onClick={() => {
+                          handleRatings(item, val);
+                        }}
                         className="peer -ms-5 size-5 bg-transparent border-0 text-transparent cursor-pointer appearance-none checked:bg-none focus:bg-none focus:ring-0 focus:ring-offset-0"
                         name={`ratings.${item}`}
                       />

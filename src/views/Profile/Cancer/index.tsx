@@ -14,7 +14,8 @@ const CancerView: FC<ICancerProps> = ({ formik }) => {
   ];
   const diagnosedAnswers = ["Yes", "No"];
   const handleChange = (item: string) => {
-    formik.setFieldValue("cancer.diagnosed", item == "Yes" ? true : false);
+    console.log(formik.values);
+    formik.setFieldValue("cancer.diagnosed", item);
   };
 
   return (
@@ -29,7 +30,13 @@ const CancerView: FC<ICancerProps> = ({ formik }) => {
             Have You Ever Been Diagnosed With Cancer?
             <Aestrik />
           </label>
+          {formik.errors.cancer?.diagnosed && (
+            <p className="text-red-600 text-[12px] mt-2">
+              {formik.errors.cancer?.diagnosed}
+            </p>
+          )}
         </div>
+
         <div className="flex items-center justify-between max-w-sm">
           {diagnosedAnswers.map((item) => (
             <div
@@ -42,8 +49,8 @@ const CancerView: FC<ICancerProps> = ({ formik }) => {
                   type="radio"
                   checked={
                     (item === "Yes" &&
-                      formik.values.cancer.diagnosed === true) ||
-                    (item === "No" && formik.values.cancer.diagnosed === false)
+                      formik.values.cancer.diagnosed === "Yes") ||
+                    (item === "No" && formik.values.cancer.diagnosed === "No")
                   }
                   onChange={() => {
                     handleChange(item);
@@ -88,6 +95,12 @@ const CancerView: FC<ICancerProps> = ({ formik }) => {
               name="cancer.location"
               value={formik.values?.cancer.location}
             />
+
+            {formik.errors.cancer?.location && (
+              <p className="text-red-600 text-[12px] mt-2">
+                {formik.errors.cancer?.location}
+              </p>
+            )}
           </div>
         </div>
       </div>

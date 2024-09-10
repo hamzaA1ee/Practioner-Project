@@ -15,21 +15,36 @@ import PaymentView from "@/views/Payment";
 import { useFormik, FormikHelpers } from "formik";
 
 //Yup validations
-import { personalDetailsSchema } from "@/schema/profile.schema";
+import {
+  cancer,
+  cancerSchema,
+  issueSchema,
+  paymentSchema,
+  personalDetails,
+  personalDetailsSchema,
+  ratingSchema,
+} from "@/schema/profile.schema";
 import { error } from "console";
 import { loginSchema } from "@/schema/login.schema";
 import next from "next";
 
 const ProfileView = () => {
+  const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false);
   const formik = useFormik<FormValues>({
-    validationSchema: personalDetailsSchema,
+    validationSchema:
+      (step == 1 && personalDetailsSchema) ||
+      (step == 2 && ratingSchema) ||
+      (step == 3 && issueSchema) ||
+      (step == 4 && cancerSchema) ||
+      (step == 5 && paymentSchema),
     initialValues: {
       personalDetails: {
         image: { secure_url: "" },
         location: "",
         dob: "",
         gender: "male",
-        issues: [],
+        issue: [],
       },
       ratings: {
         acupuncturist: 0,
@@ -47,7 +62,7 @@ const ProfileView = () => {
         legs: false,
       },
       cancer: {
-        diagnosed: false,
+        diagnosed: "",
         location: "",
         specifiedTreatment: "",
         wish: "",
@@ -69,8 +84,6 @@ const ProfileView = () => {
 
   //   console.log("formik tes", formik.values);
 
-  const [step, setStep] = useState(1);
-  const [loading, setLoading] = useState(false);
   const nextStep = async () => {
     //Set touched fields to ensure validation messages are shown
     formik.setTouched(
@@ -81,14 +94,18 @@ const ProfileView = () => {
     );
 
     const errors = await formik.validateForm();
-
+    console.log("errors", errors);
     if (Object.keys(errors).length === 0) {
-      setStep((prev) => prev + 1);
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+        setStep((prev) => prev + 1);
+      });
     } else {
       formik.setErrors(errors);
     }
   };
-  //   const nextStep = async () => {
+
   //     // Set touched fields to ensure validation messages are shown
   //     formik.setTouched(
   //       Object.keys(formik.values).reduce(
@@ -160,17 +177,8 @@ const ProfileView = () => {
                   )}
                   {step < 5 ? (
                     <button
-                      type="submit"
+                      type="button"
                       onClick={nextStep}
-                      //   onClick={() => {
-                      //     nextStep();
-                      //     setLoading(true);
-                      //     setTimeout(() => {
-                      //       setStep((step) => step + 1);
-                      //       setLoading(false);
-                      //     }, 500);
-                      //   }}
-                      //   onClick={nextStep}
                       className="w-[209px] h-[56px]  mt-4 text-white bg-black rounded-md"
                     >
                       {loading ? (
@@ -205,13 +213,6 @@ const ProfileView = () => {
                       Finish
                     </button>
                   )}
-
-                  {/* <ContinueButton
-                    step={step}
-                    loading={loading}
-                    setLoading={setLoading}
-                    setStep={setStep}
-                  /> */}
                 </div>
               </div>
             </div>

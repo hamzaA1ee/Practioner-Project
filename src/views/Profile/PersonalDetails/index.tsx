@@ -154,10 +154,9 @@ const PersonalDetailsView: FC<IPersonalDetailsProps> = ({ formik }) => {
           {/*  //ends here */}
         </div>
       }
-      {(formik.values.personalDetails.image?.secure_url == "" ||
-        formik.values.personalDetails.image?.secure_url == null) && (
+      {formik.errors.personalDetails?.image?.secure_url && (
         <p className="text-red-600 text-[12px] mt-2">
-          {formik.errors.image?.secure_url}
+          {formik.errors.personalDetails.image?.secure_url}
         </p>
       )}
       {/* image picker ends */}
@@ -182,9 +181,9 @@ const PersonalDetailsView: FC<IPersonalDetailsProps> = ({ formik }) => {
             name="personalDetails.dob"
             value={formik.values?.personalDetails.dob}
           />
-          {formik.values.personalDetails.dob == "" && (
+          {formik.errors.personalDetails?.dob && (
             <p className="text-red-600 text-[12px] mt-2">
-              {formik.errors?.dob}
+              {formik.errors.personalDetails?.dob}
             </p>
           )}
         </div>
@@ -207,9 +206,9 @@ const PersonalDetailsView: FC<IPersonalDetailsProps> = ({ formik }) => {
             onBlur={formik.handleBlur}
             value={formik.values?.personalDetails.location}
           />
-          {formik.values.personalDetails.location == "" && (
+          {formik.errors.personalDetails?.location && (
             <p className="text-red-600 text-[12px] mt-2">
-              {formik.errors?.location}
+              {formik.errors.personalDetails?.location}
             </p>
           )}
         </div>
@@ -225,9 +224,9 @@ const PersonalDetailsView: FC<IPersonalDetailsProps> = ({ formik }) => {
               Do you have preference in gender for your therapist?
               <span className="text-red-500 font-bold ml-1">*</span>
             </p>
-            {formik.values.personalDetails.gender == "" && (
+            {formik.errors.personalDetails?.gender == "" && (
               <p className="text-red-600 text-[12px] mt-2">
-                {formik.errors?.gender}
+                {formik.errors.personalDetails?.gender}
               </p>
             )}
 
@@ -294,9 +293,9 @@ const PersonalDetailsView: FC<IPersonalDetailsProps> = ({ formik }) => {
             System Issues
             <Aestrik />
           </p>
-          {formik.values.personalDetails.issues.length == 0 && (
+          {formik.errors.personalDetails?.issue && (
             <p className="text-red-600 text-[12px] mt-2">
-              {formik.errors?.issue}
+              {formik.errors.personalDetails?.issue}
             </p>
           )}
         </div>
@@ -310,11 +309,9 @@ const PersonalDetailsView: FC<IPersonalDetailsProps> = ({ formik }) => {
               <div className="relative flex items-start">
                 <div className="flex items-center h-5">
                   <input
-                    checked={formik.values.personalDetails.issues.includes(
-                      item
-                    )}
+                    checked={formik.values.personalDetails.issue.includes(item)}
                     id={`checkbox-${index}`}
-                    name="personalDetails.issues"
+                    name="personalDetails.issue"
                     value={item.toString()}
                     onChange={formik.handleChange}
                     type="checkbox"
@@ -332,11 +329,6 @@ const PersonalDetailsView: FC<IPersonalDetailsProps> = ({ formik }) => {
           ))}
         </ul>
       </div>
-      {/* </div> */}
-      <button type="submit" className="text-white bg-black p-4">
-        Submit
-      </button>
-      {/* </form>  */}
     </Fragment>
   );
 };
