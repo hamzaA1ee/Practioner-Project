@@ -33,6 +33,16 @@ export const ratings = object({
       osteopath,
     } = values;
 
+    if (
+      !acupuncturist ||
+      !remedialMessageTherapist ||
+      !chiropractor ||
+      !myotherapist ||
+      !physiotherapist ||
+      !osteopath
+    ) {
+      throw new Error("Fields not defeined");
+    }
     // Check if at least one value is greater than 0
     return (
       acupuncturist > 0 ||

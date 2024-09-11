@@ -6,7 +6,7 @@ import { FC, Fragment } from "react";
 
 import Image from "next/image";
 
-const ReviewView: FC<IFormProps> = ({ formik }) => {
+const ReviewView: FC<IFormProps> = ({ formik }: { formik: any }) => {
   const stars = Array.from({ length: 5 }, (_, index) => index + 1);
   const issues = ["Head and Neck", "Torso", "Pelvis", "Arms", "Legs"];
   return (
@@ -87,10 +87,11 @@ const ReviewView: FC<IFormProps> = ({ formik }) => {
           >
             System Issues:{" "}
             <span className="font-medium">
-              {formik.values.personalDetails.issue.map((item, index) =>
-                index == formik.values.personalDetails.issue.length - 1
-                  ? item
-                  : item + ", "
+              {formik.values.personalDetails.issue.map(
+                (item: string, index: number) =>
+                  index == formik.values.personalDetails.issue.length - 1
+                    ? item
+                    : item + ", "
               )}
             </span>
           </label>

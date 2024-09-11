@@ -5,7 +5,7 @@ import { FC, Fragment } from "react";
 //UI Imports
 import { Aestrik } from "@/components/ui/aestrik";
 
-const RatingsView: FC<IRatingsProps> = ({ formik }) => {
+const RatingsView: FC<IRatingsProps> = ({ formik }: { formik: any }) => {
   const handleRatings = (item: string, val: number) => {
     formik.setFieldValue(`ratings.${item}`, 5 - val + 1);
   };

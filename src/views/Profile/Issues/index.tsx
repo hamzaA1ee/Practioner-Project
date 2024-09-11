@@ -3,7 +3,7 @@ import { IIssuesProps } from "@/types/Interfaces/formik.interface";
 import { FC, Fragment } from "react";
 
 const issues = ["Head and Neck", "Torso", "Pelvis", "Arms", "Legs"];
-const IssuesView: FC<IIssuesProps> = ({ formik }) => {
+const IssuesView: FC<IIssuesProps> = ({ formik }: { formik: any }) => {
   const handleClick = (item: string) => {
     formik.setFieldValue(
       `issues.${item}`,
