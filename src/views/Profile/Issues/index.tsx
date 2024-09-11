@@ -30,6 +30,7 @@ const IssuesView: FC<IIssuesProps> = ({ formik }) => {
             (item: string, index: number) => (
               <div className="flex items-center mb-4 h-[42px]">
                 <input
+                  key={item}
                   checked={formik.values.issues[item] == true}
                   id="default-checkbox"
                   type="checkbox"

@@ -34,16 +34,21 @@ const RatingsView: FC<IRatingsProps> = ({ formik }) => {
           {Object.keys(formik.values.ratings).map((item: string) => (
             <div className="flex justify-between">
               <label
+                key={item}
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 htmlFor="ratings"
               >
                 {item.charAt(0).toUpperCase() + item.substring(1, item.length)}
               </label>
 
-              <div className="flex flex-row-reverse justify-end items-center">
+              <div
+                key={item}
+                className="flex flex-row-reverse justify-end items-center"
+              >
                 {stars.map((val, extra = val) => (
                   <Fragment>
                     <input
+                      key={item}
                       id="hs-ratings-readonly-1"
                       type="radio"
                       checked={5 - extra == formik.values.ratings[item]}
