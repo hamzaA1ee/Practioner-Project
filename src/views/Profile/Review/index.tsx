@@ -129,7 +129,7 @@ const ReviewView: FC<IFormProps> = ({ formik }) => {
                             id="hs-ratings-readonly-1"
                             type="radio"
                             checked={5 - extra == formik.values.ratings[item]}
-                            className="peer -ms-5 size-5 bg-transparent border-0 text-transparent appearance-none checked:bg-none focus:bg-none focus:ring-0 focus:ring-offset-0"
+                            className="peer -ms-5 size-5 bg-transparent border-0 text-transparent    appearance-none checked:bg-none focus:bg-none focus:ring-0 focus:ring-offset-0"
                             name={`ratings.${item}`}
                           />
                           <label
@@ -192,6 +192,111 @@ const ReviewView: FC<IFormProps> = ({ formik }) => {
           )}
         </div>
         <hr className="h-px my-4 bg-custom-gray border-1 dark:bg-gray-700" />
+        <div className="mt-6 gap-6 space-y-4 md:grid md:grid-cols-2 md:space-y-0">
+          <div className="w-full mt-2">
+            <label
+              className="text-2xl  font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              htmlFor="dob"
+            >
+              Requirements
+            </label>
+          </div>
+        </div>
+        <div className="mt-6 gap-6 space-y-4 md:grid md:grid-cols-2 md:space-y-0">
+          <div className="w-full">
+            <label
+              className="text-sm  font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              htmlFor="dob"
+            >
+              Cancer Diagnotion:{" "}
+              <span className="font-medium">
+                {formik.values.cancer.diagnosed}
+              </span>
+            </label>
+          </div>
+          <div className="w-full">
+            <label
+              className="text-sm  font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              htmlFor="location"
+            >
+              Specified Treatment:{" "}
+              <span className="font-medium">
+                {formik.values.cancer.specifiedTreatment}
+              </span>
+            </label>
+          </div>
+          <div className="w-full">
+            <label
+              className="text-sm  font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              htmlFor="location"
+            >
+              Location:{" "}
+              <span className="font-medium">
+                {formik.values.cancer.location}
+              </span>
+            </label>
+          </div>
+          <div className="w-full">
+            <label
+              className="text-sm  font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              htmlFor="location"
+            >
+              Wishes:{" "}
+              <span className="font-medium">{formik.values.cancer.wish}</span>
+            </label>
+          </div>
+        </div>
+        <hr className="h-px my-4 bg-custom-gray border-1" />
+        <div className="w-full mt-2">
+          <label
+            className="text-2xl  font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            htmlFor="dob"
+          >
+            Payment
+          </label>
+        </div>
+        <div className="mt-6 gap-6 space-y-4 md:grid md:grid-cols-2 md:space-y-0">
+          <div className="w-full">
+            <label
+              className="text-sm  font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              htmlFor="dob"
+            >
+              BSB Number:{" "}
+              <span className="font-medium">{formik.values.payment.bsb}</span>
+            </label>
+          </div>
+          <div className="w-full">
+            <label
+              className="text-sm  font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              htmlFor="dob"
+            >
+              Account Holder:{" "}
+              <span className="font-medium">
+                {formik.values.payment.holderName}
+              </span>
+            </label>
+          </div>
+          <div className="w-full">
+            <label
+              className="text-sm  font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              htmlFor="dob"
+            >
+              BSB Number:{" "}
+              <span className="font-medium">{formik.values.payment.bsb}</span>
+            </label>
+          </div>
+          <div className="w-full">
+            <label
+              className="text-sm  font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              htmlFor="dob"
+            >
+              Account/IBAN Number:{" "}
+              <span className="font-medium">
+                {formik.values.payment.accountNumber}
+              </span>
+            </label>
+          </div>
+        </div>
       </div>
     </Fragment>
   );
