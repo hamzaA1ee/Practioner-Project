@@ -32,7 +32,7 @@ const RatingsView: FC<IRatingsProps> = ({ formik }) => {
           </div>
 
           {Object.keys(formik.values.ratings).map((item: string) => (
-            <div className="flex justify-between">
+            <div key={item} className="flex justify-between">
               <label
                 key={item}
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -46,7 +46,7 @@ const RatingsView: FC<IRatingsProps> = ({ formik }) => {
                 className="flex flex-row-reverse justify-end items-center"
               >
                 {stars.map((val, extra = val) => (
-                  <Fragment>
+                  <Fragment key={item}>
                     <input
                       key={item}
                       id="hs-ratings-readonly-1"
@@ -59,6 +59,7 @@ const RatingsView: FC<IRatingsProps> = ({ formik }) => {
                       name={`ratings.${item}`}
                     />
                     <label
+                      key={item}
                       htmlFor="hs-ratings-readonly-1"
                       className="peer-checked:text-yellow-400 text-gray-300 pointer-events-none dark:peer-checked:text-yellow-600 dark:text-neutral-600"
                     >

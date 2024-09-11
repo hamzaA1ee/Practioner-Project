@@ -28,7 +28,7 @@ const IssuesView: FC<IIssuesProps> = ({ formik }) => {
         <div>
           {Object.keys(formik.values.issues).map(
             (item: string, index: number) => (
-              <div className="flex items-center mb-4 h-[42px]">
+              <div key={item} className="flex items-center mb-4 h-[42px]">
                 <input
                   key={item}
                   checked={formik.values.issues[item] == true}

@@ -116,7 +116,7 @@ const CancerView: FC<ICancerProps> = ({ formik }) => {
 
       <div className="mt-6 pb-5 gap-6 space-y-4 md:grid md:grid-cols-2 md:space-y-0">
         {treatments.map((item) => (
-          <div className="flex justify-items-center mb-2">
+          <div key={item} className="flex justify-items-center mb-2">
             <input
               key={item}
               id={`radio-${item}`}

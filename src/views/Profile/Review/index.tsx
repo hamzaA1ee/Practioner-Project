@@ -121,9 +121,9 @@ const ReviewView: FC<IFormProps> = ({ formik }) => {
 
               <div className="flex flex-row-reverse justify-end items-center">
                 {stars.map((val, extra = val) => (
-                  <Fragment>
+                  <Fragment key={item}>
                     {formik.values.ratings[item] >= 1 ? (
-                      <Fragment>
+                      <Fragment key={item}>
                         <input
                           key={item}
                           id="hs-ratings-readonly-1"
@@ -168,7 +168,7 @@ const ReviewView: FC<IFormProps> = ({ formik }) => {
         <div className="mt-6 gap-6 space-y-4 md:grid md:grid-cols-2 md:space-y-0">
           {Object.keys(formik.values.issues).map(
             (item: string, index: number) => (
-              <Fragment>
+              <Fragment key={item}>
                 {" "}
                 {formik.values.issues[item] == true ? (
                   <div className="flex items-center mb-4 h-[42px]">
